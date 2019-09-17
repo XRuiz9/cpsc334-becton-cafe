@@ -50,6 +50,41 @@ class Drop {
   }
 }
 
+class Drip {
+  float x;
+  float y;
+  float alpha;
+  float dripRadius;
+  
+  Drip() {
+    x = random(1200, 1950);
+    //x = random(0, width);
+    y = random(0, 550);
+    alpha = random(0, 255);
+    dripRadius = 0;
+  }
+  
+  void fade() {
+    alpha -= 3;
+    
+    if (alpha <= 0) {
+      alpha = random(0, 255);
+      dripRadius = 0;
+      x = random(1200, 1950);
+      //x = random(0, width);
+      y = random(0, 550);
+    }
+  }
+  
+  void show() {
+    fill(rand1, rand2, rand3, alpha);
+    noStroke();
+    ellipse(x, y, dripRadius, dripRadius);
+    dripRadius += 3;
+  }
+}
+
+Drip[] drips = new Drip[20];
 Drop[] drops = new Drop[100];
  
 void setup() {
@@ -59,6 +94,11 @@ void setup() {
   smooth();
   rectMode(CENTER);
   
+  //Instantiate drips
+  for (int i = 0; i < drips.length; i++) {
+    drips[i] = new Drip();
+  }
+  
   //Instantiate drops
   for (int j = 0; j < drops.length; j++) {
     drops[j] = new Drop();
@@ -67,6 +107,11 @@ void setup() {
  
 void draw() {
   background(bkg1, bkg2, bkg3);
+  
+  for (int i = 0; i < drips.length; i++) {
+    drips[i].show();
+    drips[i].fade();
+  }
   
   for (int j = 0; j < drops.length; j++) {
     drops[j].fall();
@@ -98,10 +143,6 @@ void draw() {
     //Reset rectangle
     fill = 0;
     
-    //New fill color is selected
-    rand1 = random(0, 255);
-    rand2 = random(0, 255);
-    rand3 = random(0, 255);
   } else {
     if (!fillingTop){
       fill++;
@@ -124,5 +165,10 @@ void fillTop() {
   if (radius < 0) {
     fillingTop = false;
     radius = 700;
+    
+    //New fill color is selected
+    rand1 = random(0, 255);
+    rand2 = random(0, 255);
+    rand3 = random(0, 255);
   }
 }
