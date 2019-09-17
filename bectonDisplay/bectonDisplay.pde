@@ -1,3 +1,7 @@
+
+int radius=0, alpha = 255, delta = 1, state = 1, fill = 0;
+float rand1 = random(0, 255), rand2 = random(0, 255), rand3 = random(0, 255), bkg1 = 0, bkg2 = 0, bkg3 = 0;
+
 class Drop {
   float x; // x postion of drop
   float y; // y position of drop
@@ -28,7 +32,7 @@ class Drop {
   void show() { // function to render the drop onto the screen
     float thick = map(z, 0, 20, 1, 3); //if z is near , drop is more thicker 
     strokeWeight(10); // weight of the drop
-    stroke(200, 50, 100);
+    stroke(rand1, rand2, rand3);
     line(x, y, x, y+len); // draws the line with two points 
   }
 }
@@ -41,7 +45,7 @@ class Drip {
   Drip() {
     x = random(1200, 1950);
     y = random(0, 550);
-    fadeRate = 4;
+    fadeRate = 2;
   }
   
   void fade() {
@@ -57,7 +61,7 @@ class Drip {
       radius = 0;
       x = random(1200, 1950);
       y = random(0, 550);
-      fadeRate = 4;
+      fadeRate = 2;
     }
   }
   
@@ -69,26 +73,6 @@ class Drip {
     radius++;
   }
 }
-
-//Drop[] drops = new Drop[500]; // array of drop objects
-
-//void setup() {
-//  fullScreen(); // size of the window
-//  for (int i = 0; i < drops.length; i++) { // we create the drops 
-//    drops[i] = new Drop();
-//  }
-//}
-
-//void draw() {
-//  background(0); // background color in RGB color cordinates
-//  for (int i = 0; i < drops.length; i++) {
-//    drops[i].fall(); // sets the shape and speed of drop
-//    drops[i].show(); // render drop
-//  }
-//}
-int radius=0, alpha = 255, delta = 1, state = 1;
-
-
 Drop[] drops = new Drop[100];
 Drip[] drips = new Drip[20];
 
@@ -97,29 +81,44 @@ boolean circleIsShrinking = false;
 void setup() {
   fullScreen();
   smooth();
-  for (int i = 0; i < drips.length; i++) { // we create the drops 
-    drips[i] = new Drip();
-  }
+  rectMode(CENTER);
+  //for (int i = 0; i < drips.length; i++) { // we create the drops 
+  //  drips[i] = new Drip();
+  //}
   for (int j = 0; j < drops.length; j++) {
     drops[j] = new Drop();
   }
 }
  
 void draw() {
-  background(0);
+  background(bkg1, bkg2, bkg3);
   
   //if (alpha == 0 || alpha == 255) { delta = +delta; }
   //alpha -= delta;
 
-  for (int i = 0; i < drips.length; i++) {
-    drips[i].fade(); // sets the shape and speed of drop
-    drips[i].show(); // render drop
-  }
+  //for (int i = 0; i < drips.length; i++) {
+  //  drips[i].fade(); // sets the shape and speed of drop
+  //  drips[i].show(); // render drop
+  //}
   
   for (int j = 0; j < drops.length; j++) {
     drops[j].fall();
     drops[j].show();
   }
-  //if (circleIsShrinking) radius--;
-  //else radius++;
+  
+  fill(rand1, rand2, rand3);
+  noStroke();
+  rect(width/2, height, width, fill);
+  
+  if (fill == 900) {
+    bkg1 = rand1;
+    bkg2 = rand2;
+    bkg3 = rand3;
+    fill = 0;
+    rand1 = random(0, 255);
+    rand2 = random(0, 255);
+    rand3 = random(0, 255);
+  } else {
+    fill++;
+  }
 }
