@@ -1,3 +1,6 @@
+//This program features code adapted from these two sources:
+//https://forum.processing.org/one/topic/shrinking-and-growing-shapes.html
+//https://thecodingtrain.com/CodingChallenges/004-purplerain.html
 
 int radius=700,  fill = 0;
 float rand1 = random(0, 255), rand2 = random(0, 255), rand3 = random(0, 255), bkg1 = 0, bkg2 = 0, bkg3 = 0, mem1, mem2, mem3;
