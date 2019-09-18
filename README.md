@@ -20,6 +20,7 @@ Then to make it run on boot, you'll want to make sure that you run
 And add the following lines:
 
 > sleep(50)
+
 > @python PATH_TO_start.py_IN_BECTON_DISPLAY_FOLDER
 
 
