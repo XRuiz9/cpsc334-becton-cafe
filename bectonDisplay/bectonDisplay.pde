@@ -2,8 +2,8 @@
 //https://forum.processing.org/one/topic/shrinking-and-growing-shapes.html
 //https://thecodingtrain.com/CodingChallenges/004-purplerain.html
 
-int radius=700,  fill = 0;
-float rand1 = random(0, 255), rand2 = random(0, 255), rand3 = random(0, 255), bkg1 = 0, bkg2 = 0, bkg3 = 0, mem1, mem2, mem3;
+int radius = 0,  fill = 0;
+float rand1 = random(0, 255), rand2 = random(0, 255), rand3 = random(0, 255), bkg1 = 0, bkg2 = 0, bkg3 = 0;
 boolean fillingTop = false;
 
 class Drop {
@@ -26,7 +26,6 @@ class Drop {
   }
 
   void fall() {
-    
     //Increment y position to imitate gravity and perspective
     y = y + yspeed;
     float grav = map(z, 0, 20, 0, 0.2);
@@ -43,7 +42,7 @@ class Drop {
     //Shows drops when top is not filling
     if (!fillingTop) {
       float thick = map(z, 0, 20, 1, 3);
-      strokeWeight(10);
+      strokeWeight(5);
       stroke(rand1, rand2, rand3);
       line(x, y, x, y+len);
     }
@@ -51,27 +50,31 @@ class Drop {
 }
 
 class Drip {
+  //x and y positions of drip
   float x;
   float y;
+  
+  //fade rate and size of drip
   float alpha;
   float dripRadius;
   
   Drip() {
+    //Instantiates drips on ceiling only
     x = random(1200, 1950);
-    //x = random(0, width);
     y = random(0, 550);
     alpha = random(0, 255);
     dripRadius = 0;
   }
   
   void fade() {
+    //Makes drips disappear over time
     alpha -= 3;
     
+    //Resets drips once they disappear
     if (alpha <= 0) {
       alpha = random(0, 255);
       dripRadius = 0;
       x = random(1200, 1950);
-      //x = random(0, width);
       y = random(0, 550);
     }
   }
@@ -84,7 +87,7 @@ class Drip {
   }
 }
 
-Drip[] drips = new Drip[20];
+Drip[] drips = new Drip[30];
 Drop[] drops = new Drop[100];
  
 void setup() {
@@ -126,23 +129,8 @@ void draw() {
   rect(width/2, height, width, fill);
   
   if (fill == 900) {
-    
     //Ceiling sequence begins
     fillingTop = true;
-    
-    //Storing background colors for use in fillTop()
-    mem1 = bkg1;
-    mem2 = bkg2;
-    mem3 = bkg3;
-    
-    //Update background color to rectangle color
-    bkg1 = rand1;
-    bkg2 = rand2;
-    bkg3 = rand3;
-    
-    //Reset rectangle
-    fill = 0;
-    
   } else {
     if (!fillingTop){
       fill++;
@@ -150,25 +138,35 @@ void draw() {
   }
 }
 
-//Makes circle appear on ceiling that imitates a container being filled
 void fillTop() {
   
   //Plays circle animation
   if (fillingTop) {
-    fill(mem1, mem2, mem3);
+    fill(rand1, rand2, rand3);
     noStroke();
     ellipse(1615, 290, radius, radius);
-    radius -= 3;
+    radius += 3;
+  }
+  
+  if (radius > 950) {
+    //Update background color to rectangle color
+    bkg1 = rand1;
+    bkg2 = rand2;
+    bkg3 = rand3;
   }
   
   //Resets animation
-  if (radius < 0) {
-    fillingTop = false;
-    radius = 700;
+  if (radius > 1050) {
     
     //New fill color is selected
     rand1 = random(0, 255);
     rand2 = random(0, 255);
     rand3 = random(0, 255);
+    
+    //Reset rectangle and top
+    radius = 0;
+    fill = 0;
+    
+    fillingTop = false;
   }
 }
