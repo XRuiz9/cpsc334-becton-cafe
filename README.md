@@ -11,10 +11,10 @@ In order to use this program in your own video displays (though it is important 
 - A power cable (Either Micro-USB to USB-B or Micro-USB to AC Adapter)
 
 You can either run the program manual once you've downloaded the git repository or you can make it run on boot. Either way you'll need to run this code:
-	curl https://processing.org/download/install-arm.sh | sudo sh
+	> curl https://processing.org/download/install-arm.sh | sudo sh
 
 Then to make it run on boot, you'll want to make sure that you add
-	@python PATH_TO_start.py_IN_BECTON_DISPLAY_FOLDER
+	> @python PATH_TO_start.py_IN_BECTON_DISPLAY_FOLDER
 in
-	/etc/xdg/lxsession/LXDE-pi/autostart
+	> /etc/xdg/lxsession/LXDE-pi/autostart
 (the start.py file associated with it is already in the git repository)
