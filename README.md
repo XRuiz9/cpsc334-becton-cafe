@@ -10,7 +10,7 @@ In order to use this program in your own video displays (though it is important 
 - An HDMI Cable (There is one provided in Becton Cafe)
 - A power cable (Either Micro-USB to USB-B or Micro-USB to AC Adapter)
 
-You can either run the program manual once you've downloaded the git repository or you can make it run on boot. Either way you'll need to run this code:
+You can either run the program manual once you've downloaded the git repository or you can make it run on boot. Either way you'll need to run this code to make sure you have Processing for pi on your device:
 > curl https://processing.org/download/install-arm.sh | sudo sh
 
 Then to make it run on boot, you'll want to make sure that you run
@@ -25,3 +25,5 @@ And add the following lines:
 
 
 (the start.py file associated with it is already in the git repository)
+
+Once you do this the program should run automatically once you connect to a source of power.
