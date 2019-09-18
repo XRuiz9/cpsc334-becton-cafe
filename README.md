@@ -27,3 +27,5 @@ And add the following lines:
 (the start.py file associated with it is already in the git repository)
 
 Once you do this the program should run automatically once you connect to a source of power.
+
+NOTE: Due to the Raspberry Pi's computing limitations, the program animations actually run much slower than I intended them to when run on the Raspberry Pi. The video linked above shows the program running at its intended speed on my laptop.
