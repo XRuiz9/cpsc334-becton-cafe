@@ -15,6 +15,8 @@ You can either run the program manual once you've downloaded the git repository 
 
 Then to make it run on boot, you'll want to make sure that you add
 > @python PATH_TO_start.py_IN_BECTON_DISPLAY_FOLDER
-in
+
+To the following file path
+
 > /etc/xdg/lxsession/LXDE-pi/autostart
 (the start.py file associated with it is already in the git repository)
